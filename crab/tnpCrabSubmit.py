@@ -4,17 +4,20 @@ import os
 #
 # Example script to submit TnPTreeProducer to crab
 #
-submitVersion = "2024-01-08" # add some date here
+submitVersion = "2024-04-01" # add some date here
 doL1matching  = False
 isAOD = False
 
-defaultArgs   = ['doEleID=True','doPhoID=True','doTrigger=True']
-AODArgs     = ['isAOD=True','doRECO=True']
-mainOutputDir = '/store/group/phys_egamma/ec/tnpTuples/Prompt2023/%s' % (submitVersion)
+defaultArgs     = ['doEleID=True','doPhoID=True','doTrigger=True']
+AODArgs         = ['isAOD=True','doRECO=True']
+#mainOutputDir   = '/store/group/phys_egamma/ec/tnpTuples/Prompt2023/%s' % (submitVersion)
+mainOutputDir   = '/store/user/caleb/CMS_EGamma/tnpTuples/Prompt2023/%s' % (submitVersion)
 
 # Logging the current version of TnpTreeProducer here, such that you can find back what the actual code looked like when you were submitting
-os.system('mkdir -p /eos/cms/%s' % mainOutputDir)
-os.system('(git log -n 1;git diff) &> /eos/cms/%s/git.log' % mainOutputDir)
+#os.system('mkdir -p /eos/cms/%s' % mainOutputDir)
+#os.system('(git log -n 1;git diff) &> /eos/cms/%s/git.log' % mainOutputDir)
+os.system('eosmkdir -p %s' % mainOutputDir)
+os.system('(git log -n 1;git diff) &> %s/git.log' % mainOutputDir)
 
 
 #
@@ -36,7 +39,8 @@ config.Data.inputDataset               = ''
 config.Data.inputDBS                   = 'global'
 config.Data.publication                = False
 config.Data.allowNonValidInputDataset  = True
-config.Site.storageSite                = 'T2_CH_CERN'
+#config.Site.storageSite                = 'T2_CH_CERN'
+config.Site.storageSite                = 'T3_US_FNALLPC'
 
 
 #
