@@ -4,7 +4,7 @@ import os
 #
 # Example script to submit TnPTreeProducer to crab
 #
-submitVersion = "2024-04-01" # add some date here
+submitVersion = "2024-04-02" # add some date here
 doL1matching  = False
 isAOD = False
 
@@ -16,8 +16,8 @@ mainOutputDir   = '/store/user/caleb/CMS_EGamma/tnpTuples/Prompt2023/%s' % (subm
 # Logging the current version of TnpTreeProducer here, such that you can find back what the actual code looked like when you were submitting
 #os.system('mkdir -p /eos/cms/%s' % mainOutputDir)
 #os.system('(git log -n 1;git diff) &> /eos/cms/%s/git.log' % mainOutputDir)
-os.system('eosmkdir -p %s' % mainOutputDir)
-os.system('(git log -n 1;git diff) &> %s/git.log' % mainOutputDir)
+#os.system('eosmkdir -p %s' % mainOutputDir)
+#os.system('(git log -n 1;git diff) &> %s/git.log' % mainOutputDir)
 
 
 #
@@ -32,7 +32,7 @@ config.General.workArea                = 'crab_%s' % submitVersion
 
 config.JobType.pluginName              = 'Analysis'
 config.JobType.psetName                = '../python/TnPTreeProducer_cfg.py'
-config.JobType.sendExternalFolder      = True
+config.JobType.sendExternalFolder      = False
 config.JobType.allowUndistributedCMSSW = True
 
 config.Data.inputDataset               = ''
