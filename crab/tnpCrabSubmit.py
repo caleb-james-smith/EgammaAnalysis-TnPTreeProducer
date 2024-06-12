@@ -4,11 +4,11 @@ import os
 #
 # Example script to submit TnPTreeProducer to crab
 #
-submitVersion = "2024-04-02" # add some date here
+submitVersion = "2024-06-12" # add some date here
 doL1matching  = False
-isAOD = False
+isAOD         = False
 
-defaultArgs     = ['doEleID=True','doPhoID=True','doTrigger=True']
+defaultArgs     = ['useJPsiMassCut=True', 'doEleID=True','doPhoID=True','doTrigger=True']
 AODArgs         = ['isAOD=True','doRECO=True']
 #mainOutputDir   = '/store/group/phys_egamma/ec/tnpTuples/Prompt2023/%s' % (submitVersion)
 mainOutputDir   = '/store/user/caleb/CMS_EGamma/tnpTuples/Prompt2023/%s' % (submitVersion)
@@ -18,7 +18,6 @@ mainOutputDir   = '/store/user/caleb/CMS_EGamma/tnpTuples/Prompt2023/%s' % (subm
 #os.system('(git log -n 1;git diff) &> /eos/cms/%s/git.log' % mainOutputDir)
 #os.system('eosmkdir -p %s' % mainOutputDir)
 #os.system('(git log -n 1;git diff) &> %s/git.log' % mainOutputDir)
-
 
 #
 # Common CRAB settings
@@ -115,6 +114,7 @@ eraData       = '2023'
 eraMCpreBPIX  = '2023preBPIX'
 eraMCpostBPIX = '2023postBPIX'
 
+# 2023 data: periods C and D
 submitWrapper('Run2023C_0v1', '/EGamma0/Run2023C-22Sep2023_v1-v1/MINIAOD', eraData)
 submitWrapper('Run2023C_0v2', '/EGamma0/Run2023C-22Sep2023_v2-v1/MINIAOD', eraData)
 submitWrapper('Run2023C_0v3', '/EGamma0/Run2023C-22Sep2023_v3-v1/MINIAOD', eraData)
@@ -128,13 +128,19 @@ submitWrapper('Run2023D_0v2', '/EGamma0/Run2023D-22Sep2023_v2-v1/MINIAOD', eraDa
 submitWrapper('Run2023D_1v1', '/EGamma1/Run2023D-22Sep2023_v1-v1/MINIAOD', eraData)
 submitWrapper('Run2023D_1v2', '/EGamma1/Run2023D-22Sep2023_v2-v1/MINIAOD', eraData)
 
-submitWrapper('DY_LO_preBPIX', '/DYto2L-4Jets_MLL-50_TuneCP5_13p6TeV_madgraphMLM-pythia8/Run3Summer23MiniAODv4-130X_mcRun3_2023_realistic_v14-v1/MINIAODSIM', eraMCpreBPIX)
-submitWrapper('DY_NLO_preBPIX', '/DYto2L-2Jets_MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer23MiniAODv4-130X_mcRun3_2023_realistic_v14-v1/MINIAODSIM', eraMCpreBPIX)
-submitWrapper('DY_LO_postBPIX', '/DYto2L-4Jets_MLL-50_TuneCP5_13p6TeV_madgraphMLM-pythia8/Run3Summer23BPixMiniAODv4-130X_mcRun3_2023_realistic_postBPix_v2-v3/MINIAODSIM', eraMCpostBPIX)
-submitWrapper('DY_NLO_postBPIX', '/DYto2L-2Jets_MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer23BPixMiniAODv4-130X_mcRun3_2023_realistic_postBPix_v2-v3/MINIAODSIM', eraMCpostBPIX)
+# 2023 MC: DY to 2L (LO and NLO), pre/post BPIX issue
+#submitWrapper('DY_LO_preBPIX',    '/DYto2L-4Jets_MLL-50_TuneCP5_13p6TeV_madgraphMLM-pythia8/Run3Summer23MiniAODv4-130X_mcRun3_2023_realistic_v14-v1/MINIAODSIM', eraMCpreBPIX)
+#submitWrapper('DY_NLO_preBPIX',   '/DYto2L-2Jets_MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer23MiniAODv4-130X_mcRun3_2023_realistic_v14-v1/MINIAODSIM', eraMCpreBPIX)
+#submitWrapper('DY_LO_postBPIX',   '/DYto2L-4Jets_MLL-50_TuneCP5_13p6TeV_madgraphMLM-pythia8/Run3Summer23BPixMiniAODv4-130X_mcRun3_2023_realistic_postBPix_v2-v3/MINIAODSIM', eraMCpostBPIX)
+#submitWrapper('DY_NLO_postBPIX',  '/DYto2L-2Jets_MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/Run3Summer23BPixMiniAODv4-130X_mcRun3_2023_realistic_postBPix_v2-v3/MINIAODSIM', eraMCpostBPIX)
 
-if isAOD:  #AOD files
-  
+# 2023 MC: J/psi to EE, pT = [2, 30], pre/post BPIX issue
+submitWrapper('JpsiToEE_preBPIX_v1',  '/JpsiToEE_Pt-2To30_TuneCP5_13p6TeV_pythia8/Run3Winter23MiniAOD-126X_mcRun3_2023_forPU65_v1-v2/MINIAODSIM', eraMCpreBPIX)
+submitWrapper('JpsiToEE_preBPIX_v3',  '/JpsiToEE_Pt-2To30_TuneCP5_13p6TeV_pythia8/Run3Winter23MiniAOD-GTv3Digi_GTv3_MiniGTv3_126X_mcRun3_2023_forPU65_v3-v2/MINIAODSIM', eraMCpreBPIX)
+submitWrapper('JpsiToEE_postBPIX',    '/JpsiToEE_Pt-2To30_TuneCP5_13p6TeV_pythia8/Run3Summer23BPixMiniAODv4-130X_mcRun3_2023_realistic_postBPix_v2-v2/MINIAODSIM', eraMCpostBPIX)
+
+# AOD files
+if isAOD:
   submitWrapper('Run2023C_0v1_AOD', '/EGamma0/Run2023C-PromptReco-v1/AOD', eraData)
   submitWrapper('Run2023C_0v2_AOD', '/EGamma0/Run2023C-PromptReco-v2/AOD', eraData)
   submitWrapper('Run2023C_0v3_AOD', '/EGamma0/Run2023C-PromptReco-v3/AOD', eraData)
