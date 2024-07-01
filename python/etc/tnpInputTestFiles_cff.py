@@ -12,8 +12,11 @@ filesMiniAOD_2022 = {
     'data' : cms.untracked.vstring('root://cmsxrootd.fnal.gov//store/data/Run2022B/EGamma/MINIAOD/PromptReco-v1/000/355/558/00000/92629520-53fb-4f1d-8465-a15b5504e149.root'),
 }
 
+# Data: Mini AOD or Nano AOD
 filesMiniAOD_2023 = {
-    'data' : cms.untracked.vstring('root://cms-xrd-global.cern.ch//store/data/Run2023D/EGamma0/MINIAOD/22Sep2023_v2-v1/40000/01953bad-f7fc-496b-a729-e240bde2abc4.root'),
+    #'data' : cms.untracked.vstring('root://cms-xrd-global.cern.ch//store/data/Run2023D/EGamma0/MINIAOD/22Sep2023_v2-v1/40000/01953bad-f7fc-496b-a729-e240bde2abc4.root'),
+    'data' : cms.untracked.vstring('root://cms-xrd-global.cern.ch//store/data/Run2023D/EGamma0/MINIAOD/22Sep2023_v2-v1/40000/38ddae02-8e07-466b-8003-0ac6c5330f0d.root'),
+    #'data' : cms.untracked.vstring('root://cms-xrd-global.cern.ch//store/data/Run2023D/EGamma0/NANOAOD/22Sep2023_v2-v1/50000/23d7ca77-f796-4443-a572-da5af19267ea.root'),
 }
 
 # MC: DY or J/psi

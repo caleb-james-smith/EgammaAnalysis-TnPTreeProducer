@@ -72,7 +72,7 @@ options['HLTProcessName']       = varOptions.HLTname
 options['era']                  = varOptions.era
 
 #options['ELECTRON_COLL']        = "gedGsfElectrons" if options['useAOD'] else "slimmedElectrons"
-options['ELECTRON_COLL']        = "gedGsfElectrons" if options['useAOD'] else "LowPtElectrons"
+options['ELECTRON_COLL']        = "gedGsfElectrons" if options['useAOD'] else "slimmedLowPtElectrons"
 options['PHOTON_COLL']          = "gedPhotons" if options['useAOD'] else "slimmedPhotons"
 options['SUPERCLUSTER_COLL']    = "reducedEgamma:reducedSuperClusters" ### not used in AOD
 
