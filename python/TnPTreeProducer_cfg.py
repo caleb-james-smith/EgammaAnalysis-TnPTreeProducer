@@ -27,6 +27,8 @@ registerOption('doRECO',          False,    'Include tree for Reco SF (requires 
 registerOption('calibEn',         False,    'Use EGM smearer to calibrate photon and electron energy')
 registerOption('includeSUSY',     False,    'Add also the variables used by SUSY')
 registerOption('useJPsiMassCut',  False,    'Use J/psi mass cut instead of Z mass cut')
+#registerOption('doLowPtEleId', False, 'Include lowPt electron collection')
+#registerOtion('pileUpTrigger', False, 'Include data for using pileup vertices')
 
 registerOption('HLTname',     'HLT',    'HLT process name (default HLT)', optionType=VarParsing.varType.string) # HLTname was HLT2 in now outdated reHLT samples
 registerOption('GT',          'auto',   'Global Tag to be used', optionType=VarParsing.varType.string)
@@ -93,6 +95,9 @@ options['useJPsiMassCut']       = varOptions.useJPsiMassCut
 options['UseCalibEn']           = varOptions.calibEn
 options['addSUSY']              = varOptions.includeSUSY and not options['useAOD']
 
+#options['doLowPtEleId']         = varOptions.doLowPtEleId
+#options['pileUpTrigger']        = varOptions.pileUpTrigger
+
 options['OUTPUT_FILE_NAME']     = "TnPTree_%s.root" % ("mc" if options['isMC'] else "data")
 
 log.info('outputfile: %s' % options['OUTPUT_FILE_NAME'])
@@ -147,6 +152,11 @@ doubleEle33_leg1_allFilters = {'passHLTEGL1SingleAndDoubleEGNonIsoOrWithEG26With
 #HLT_DoubleEle33_CaloIdL_MW
 doubleEle33_leg2_allFilters = {'passHLTDiEG33EtUnseededFilter': cms.vstring('hltDiEG33EtUnseededFilter'), 'passHLTDiEG33HEUnseededFilter': cms.vstring('hltDiEG33HEUnseededFilter'), 'passHLTDiEG33CaloIdLClusterShapeUnseededFilter': cms.vstring('hltDiEG33CaloIdLClusterShapeUnseededFilter'), 'passHLTDiEle33CaloIdLPixelMatchUnseededFilter': cms.vstring('hltDiEle33CaloIdLPixelMatchUnseededFilter')}
 
+#HLT_isoMu24 (FIX THIS)
+#isoMu24_allFilters = {'passHLTEGL1SingleAndDoubleEGOrPairFilter': cms.vstring('hltEGL1SingleAndDoubleEGOrPairFilter') }
+ 
+
+
 if '2016' in options['era']:
   options['TnPPATHS']           = cms.vstring("HLT_Ele27_eta2p1_WPTight_Gsf_v*")
   options['TnPHLTTagFilters']   = cms.vstring("hltEle27erWPTightGsfTrackIsoFilter")
@@ -197,6 +207,7 @@ elif '2023' in options['era']:
   options['TnPHLTTagFilters']   = cms.vstring("hltEle30WPTightGsfTrackIsoFilter")
   options['TnPHLTProbeFilters'] = cms.vstring()
   options['HLTFILTERSTOMEASURE']= {}
+  options['isoMu24'] = cms.vstring("isoMu24*") #FIX THIS
   options['HLTFILTERSTOMEASURE'].update(ele30_allFilters) 
   options['HLTFILTERSTOMEASURE'].update(ele115_allFilters)
   options['HLTFILTERSTOMEASURE'].update(ele23ele12_allFilters)
@@ -277,6 +288,9 @@ if options['DoEleID'] or options['DoTrigger'] : process.cand_sequence += process
 if options['DoPhoID']                         : process.cand_sequence += process.pho_sequence
 if options['DoTrigger']                       : process.cand_sequence += process.hlt_sequence
 if options['DoRECO']                          : process.cand_sequence += process.sc_sequence
+#if options['isoMu24']                         : process.cand_sequence += process.isoMu_sequence 
+#if options['pileUpTrigger']                   : process.cand_sequence += process.pileUp_sequence
+#if options['doLowPtEleId']                    : process.cand_sequence += process.lowPt_sequence
 
 process.tnpPairs_sequence = cms.Sequence()
 if options['DoTrigger'] : process.tnpPairs_sequence *= process.tnpPairingEleHLT
@@ -284,6 +298,8 @@ if options['DoRECO']    : process.tnpPairs_sequence *= process.tnpPairingEleRec
 if options['DoEleID']   : process.tnpPairs_sequence *= process.tnpPairingEleIDs
 if options['DoPhoID']   : process.tnpPairs_sequence *= process.tnpPairingPhoIDs
 
+#if options['pileUpTrigger']   : process.tnpPairs_sequence *= process.tnpPairingPileUp #FIXME
+#if option['doLowPtEleId']     : process.tnpPairs_sequence *= process.tnpPairingLowPt  #FIXME
 ##########################################################################
 ## TnP Trees
 ##########################################################################
@@ -295,6 +311,19 @@ process.tnpEleTrig = cms.EDAnalyzer("TagProbeFitTreeProducer",
                                     allProbes     = cms.InputTag("probeEle"),
                                     flags         = cms.PSet(),
                                     )
+
+#process.tnpEleTrig = cms.EDAnalyzer("TagProbeFitTreeProducer",
+#                                    mcTruthCommonStuff,
+#                                    tnpVars.CommonStuffForGsfElectronProbe,
+#                                    tagProbePairs = cms.InputTag("tnpPairingEleHLT"),
+#                                    probeMatches  = cms.InputTag("genProbeEle"),
+#                                    allProbes     = cms.InputTag("probeEle"),
+#                                    flags         = cms.PSet(),
+#                                    )
+
+
+
+
 
 for flag in options['HLTFILTERSTOMEASURE']:
   setattr(process.tnpEleTrig.flags, flag, cms.InputTag(flag))

@@ -142,7 +142,36 @@ EleProbeVariablesToStore = cms.PSet(
     el_seedGain       = cms.InputTag("eleVarHelper:seedGain"),
     #csev
 
+
+    #lowpt_eta    = cms.string("eta"),
+    #lowpt_phi    = cms.string("phi"),
+    #lowpt_abseta = cms.string("abs(eta)"),
+    #lowpt_pt     = cms.string("pt"),
+    #lowpt_et     = cms.string("et"),
+    #lowpt_e      = cms.string("energy"),
+    #lowpt_q      = cms.string("charge"),
+    #lowpt_embedID = cms.string("embeddedID"),
+    #lowpt_dxy = cms.string("dxy"),
+    #lowpt_dz = cms.string("dz"),
+    #lowpt_dzErr = cms.string("dzErr"),
+    #lowpt_dxtErr = cms.string("dxyErr"),
+    #lowpt_miniPFall = cms.string("miniPFRelIso_all"),
+    #lowpt_miniPFchg = cms.string("miniPFRelIso_chg"),
+    #lowpt_conv = cms.string("conVeto")
+ 
     )
+
+
+
+
+
+
+
+
+
+
+
+
 
 PhoProbeVariablesToStore = cms.PSet(
     ph_eta    = cms.string("eta"),
@@ -243,6 +272,22 @@ TagVariablesToStore = cms.PSet(
     Ele_noIso122X       = cms.InputTag("electronMVAValueMapProducer:ElectronMVAEstimatorRun2RunIIIWinter22NoIsoV1Values"),
     Ele_Iso122X       = cms.InputTag("electronMVAValueMapProducer:ElectronMVAEstimatorRun2RunIIIWinter22IsoV1Values")
     )
+MuTagVariablesToStore = cms.PSet(
+     Mu_eta    = cms.string("eta"),
+     Mu_phi    = cms.string("phi"),
+     Mu_abseta = cms.string("abs(eta)"),
+     Mu_pt     = cms.string("pt"),
+     Mu_et     = cms.string("et"),
+     Mu_e      = cms.string("energy"),
+     Mu_q      = cms.string("charge"),
+ 
+ 
+     ## Ele_mHits          = cms.InputTag("eleVarHelper:missinghits"),
+     Mu_dz              = cms.InputTag("eleVarHelper:dz"),
+     Mu_dxy             = cms.InputTag("eleVarHelper:dxy"),
+     Mu_sip              = cms.InputTag("eleVarHelper:sip"),
+ 
+     )
 
 CommonStuffForGsfElectronProbe = cms.PSet(
     addEventVariablesInfo   =  cms.bool(True),
