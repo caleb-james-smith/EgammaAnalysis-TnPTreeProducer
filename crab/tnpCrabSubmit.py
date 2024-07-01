@@ -4,7 +4,7 @@ import os
 #
 # Example script to submit TnPTreeProducer to crab
 #
-submitVersion = "2024-06-12" # add some date here
+submitVersion = "2024-06-13-v1" # add some date/version here
 doL1matching  = False
 isAOD         = False
 

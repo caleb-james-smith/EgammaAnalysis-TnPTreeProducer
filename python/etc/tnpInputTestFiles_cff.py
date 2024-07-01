@@ -16,13 +16,17 @@ filesMiniAOD_2023 = {
     'data' : cms.untracked.vstring('root://cms-xrd-global.cern.ch//store/data/Run2023D/EGamma0/MINIAOD/22Sep2023_v2-v1/40000/01953bad-f7fc-496b-a729-e240bde2abc4.root'),
 }
 
+# MC: DY or J/psi
 filesMiniAOD_2023preBPIX = {
-    'mc' : cms.untracked.vstring('root://cms-xrd-global.cern.ch//store/mc/Run3Summer23MiniAODv4/DYto2L-2Jets_MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/MINIAODSIM/130X_mcRun3_2023_realistic_v14-v1/2550000/00070982-2c6a-4df6-9af7-530f9155c758.root')
-    }
+    #'mc' : cms.untracked.vstring('root://cms-xrd-global.cern.ch//store/mc/Run3Summer23MiniAODv4/DYto2L-2Jets_MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/MINIAODSIM/130X_mcRun3_2023_realistic_v14-v1/2550000/00070982-2c6a-4df6-9af7-530f9155c758.root')
+    'mc' : cms.untracked.vstring('root://cms-xrd-global.cern.ch//store/mc/Run3Winter23MiniAOD/JpsiToEE_Pt-2To30_TuneCP5_13p6TeV_pythia8/MINIAODSIM/126X_mcRun3_2023_forPU65_v1-v2/2550000/4164ced9-7d14-47b0-b7ce-f66bbaca7793.root')
+}
 
+# MC: DY or J/psi
 filesMiniAOD_2023postBPIX = {
-    'mc' : cms.untracked.vstring('root://cms-xrd-global.cern.ch//store/mc/Run3Summer23BPixMiniAODv4/DYto2L-2Jets_MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/MINIAODSIM/130X_mcRun3_2023_realistic_postBPix_v2-v3/80000/0040c573-d7f9-47c0-bf8a-2c40619c8ffb.root')
-    }
+    #'mc' : cms.untracked.vstring('root://cms-xrd-global.cern.ch//store/mc/Run3Summer23BPixMiniAODv4/DYto2L-2Jets_MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/MINIAODSIM/130X_mcRun3_2023_realistic_postBPix_v2-v3/80000/0040c573-d7f9-47c0-bf8a-2c40619c8ffb.root')
+    'mc' : cms.untracked.vstring('root://cms-xrd-global.cern.ch//store/mc/Run3Summer23BPixMiniAODv4/JpsiToEE_Pt-2To30_TuneCP5_13p6TeV_pythia8/MINIAODSIM/130X_mcRun3_2023_realistic_postBPix_v2-v2/80000/c4dc3b99-0c71-4ece-947c-9a32c87797f9.root')
+}
 
 filesMiniAOD_2017 = {
     'mc' :   cms.untracked.vstring('file:/eos/cms/store/group/phys_egamma/tnpTuples/testFiles/RunIIFall17MiniAODv2-DYJetsToLL_M-50.root'),
