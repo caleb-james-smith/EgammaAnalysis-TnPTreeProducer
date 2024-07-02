@@ -74,6 +74,7 @@ options['use80X']               = varOptions.is80X
 options['HLTProcessName']       = varOptions.HLTname
 options['era']                  = varOptions.era
 
+
 options['ELECTRON_COLL']        = "gedGsfElectrons" if options['useAOD'] else "slimmedElectrons"
 options['LOWPTELECTRON_COLL']   = "gedGsfElectrons" if options['useAOD'] else "slimmedLowPtElectrons"
 options['PHOTON_COLL']          = "gedPhotons" if options['useAOD'] else "slimmedPhotons"
