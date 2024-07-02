@@ -4,14 +4,14 @@ import os
 #
 # Example script to submit TnPTreeProducer to crab
 #
-submitVersion = "2024-06-13-v1" # add some date/version here
+submitVersion = "2024-07-02-v1" # add some date/version here
 doL1matching  = False
 isAOD         = False
 
-defaultArgs     = ['useJPsiMassCut=True', 'doEleID=True','doPhoID=True','doTrigger=True']
+defaultArgs     = ['useJPsiMassCut=True', 'doEleID=True','doPhoID=True','doTrigger=True','doLowPtEleID=True']
 AODArgs         = ['isAOD=True','doRECO=True']
 #mainOutputDir   = '/store/group/phys_egamma/ec/tnpTuples/Prompt2023/%s' % (submitVersion)
-mainOutputDir   = '/store/user/caleb/CMS_EGamma/tnpTuples/Prompt2023/%s' % (submitVersion)
+mainOutputDir   = '/store/user/bchild/CMS_EGamma/tnpTuples/Prompt2023/%s' % (submitVersion)
 
 # Logging the current version of TnpTreeProducer here, such that you can find back what the actual code looked like when you were submitting
 #os.system('mkdir -p /eos/cms/%s' % mainOutputDir)

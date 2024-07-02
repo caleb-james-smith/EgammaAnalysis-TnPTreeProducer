@@ -19,6 +19,11 @@ filesMiniAOD_2023 = {
     #'data' : cms.untracked.vstring('root://cms-xrd-global.cern.ch//store/data/Run2023D/EGamma0/NANOAOD/22Sep2023_v2-v1/50000/23d7ca77-f796-4443-a572-da5af19267ea.root'),
 }
 
+#filesMiniAOD_2023 = {
+#    'data' : cms.untracked.vstring('root://cms-xrd-global.cern.ch//store/data/Run2023D/EGamma0/NANOAOD/22Sep2023_v2-v1/50000/93273861-b59b-4348-9b6f-b19f50a52041.root'),
+
+#}
+
 # MC: DY or J/psi
 filesMiniAOD_2023preBPIX = {
     #'mc' : cms.untracked.vstring('root://cms-xrd-global.cern.ch//store/mc/Run3Summer23MiniAODv4/DYto2L-2Jets_MLL-50_TuneCP5_13p6TeV_amcatnloFXFX-pythia8/MINIAODSIM/130X_mcRun3_2023_realistic_v14-v1/2550000/00070982-2c6a-4df6-9af7-530f9155c758.root')

@@ -15,6 +15,9 @@ def calibrateEGM(process, options ):
                                                        calibratedPatPhotons    = cms.PSet( initialSeed = cms.untracked.uint32(81),
                                                                                            engineName = cms.untracked.string('TRandom3'),                
                                                                                            ),
+                                                       calibratedPatLowPtElectrons  = cms.PSet( initialSeed = cms.untracked.uint32(81),
+                                                                                           engineName = cms.untracked.string('TRandom3'),  
+                                                                                           ),
                                                        )
 
     process.load('EgammaAnalysis.ElectronTools.regressionApplication_cff')
@@ -22,12 +25,16 @@ def calibrateEGM(process, options ):
     process.load('EgammaAnalysis.ElectronTools.calibratedPatPhotonsRun2_cfi')
 
     process.calibratedPatElectrons.electrons = cms.InputTag(options['ELECTRON_COLL'])
+    process.calibratedPatLowPtElectrons.electrons = cms.InputTag(options['LOWPTELECTRON_COLL'])
     process.calibratedPatPhotons.photons     = cms.InputTag(options['PHOTON_COLL']  )
+    
     if options['isMC']:
         process.calibratedPatElectrons.isMC = cms.bool(True)
+        process.calibratedPatLowPtElectrons.electrons = cms.bool(True)
         process.calibratedPatPhotons.isMC   = cms.bool(True)
     else :
         process.calibratedPatElectrons.isMC = cms.bool(False)
+        process.calibratedPatLowPtElectrons.electrons = cms.bool(False)
         process.calibratedPatPhotons.isMC   = cms.bool(False)
 
 
@@ -35,6 +42,11 @@ def calibrateEGM(process, options ):
     process.selectElectronsBase = cms.EDFilter("PATElectronSelector",
                                                src = cms.InputTag('calibratedPatElectrons'),
                                                cut = cms.string(  options['ELECTRON_CUTS']),
+                                               )
+
+    process.selectLowPtElectronsBase = cms.EDFilter("SingleObjectSelector<std::vector<LowPtElectron>, StringCutObjectSelector<LowPtElectron>>",
+                                               src = cms.InputTag('calibratedPatLowPtElectrons'),
+                                               cut = cms.string(  options['LOWPTELECTRON_CUTS']),
                                                )
 
     process.selectPhotonsBase   = cms.EDFilter("PATPhotonSelector",
@@ -74,12 +86,24 @@ def setGoodParticlesMiniAOD(process, options):
                                           eeRecHits        = cms.InputTag("reducedEgamma","reducedEERecHits","PAT")
                                           )
 
+    process.lowpteleVarHelper = process.eleVarHelper.clone()
+    process.lowpteleVarHelper.probes = cms.InputTag( options['LOWPTELECTRON_COLL'] )
+
     ####################  Electron collection
     process.goodElectrons = cms.EDFilter("PATElectronRefSelector",
                                          src = cms.InputTag( options['ELECTRON_COLL'] ),
                                          cut = cms.string(   options['ELECTRON_CUTS'] ),
                                          )
+
     
+    ####################  LowPtElectron collection 
+    if options['DoLowPtEleID']:
+        process.goodLowPtElectrons = cms.EDFilter("PATElectronRefSelector",
+                                            src = cms.InputTag( options['LOWPTELECTRON_COLL'] ),
+                                            cut = cms.string(   options['LOWPTELECTRON_CUTS'] ),
+                                            )
+
+
     ####################  Photon collection
     process.goodPhotons   =  cms.EDFilter("PATPhotonRefSelector",
                                             src = cms.InputTag( options['PHOTON_COLL'] ),
@@ -157,6 +181,13 @@ def setGoodParticlesAOD(process, options):
                                          src = cms.InputTag(options['ELECTRON_COLL']),
                                          cut = cms.string(options['ELECTRON_CUTS'])
                                          )
+
+    #################### LowPtElectron collection
+    if options['DoLowPtEleID']:
+        process.goodLowPtElectrons = cms.EDFilter("SingleObjectSelector<std::vector<LowPtElectron>, StringCutObjectSelector<LowPtElectron>, edm::RefVector<std::vector<LowPtElectron>>>",
+                                            src = cms.InputTag( options['LOWPTELECTRON_COLL'] ),
+                                            cut = cms.string(   options['LOWPTELECTRON_CUTS'] ),
+                                            )
 
     ####################  Photon collection
     ### dummy in AOD (use miniAOD for photons)
